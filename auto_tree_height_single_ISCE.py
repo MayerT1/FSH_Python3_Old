@@ -24,17 +24,17 @@ def auto_tree_height_single_ISCE(directory, date1, date2, numLooks, noiselevel, 
     # Extract ISCE parameters
     logfile = directory+"int_"+date1+"_"+date2+"/isce.log"
 
-    strg=commands.getoutput('fgrep "master.instrument.range_pixel_size" '+logfile)
+    strg=subprocess.getoutput('fgrep "master.instrument.range_pixel_size" '+logfile)
     range_pixel_res = float(string.split(strg)[-1])
 
-    strg=commands.getoutput('fgrep "master.instrument.radar_wavelength" '+logfile)
+    strg=subprocess.getoutput('fgrep "master.instrument.radar_wavelength" '+logfile)
     llambda = float(string.split(strg)[-1])
 
-    strg=commands.getoutput('fgrep "runTopo.inputs.range_first_sample" '+logfile)
+    strg=subprocess.getoutput('fgrep "runTopo.inputs.range_first_sample" '+logfile)
     first_range = float(string.split(strg)[-1])
-    strg=commands.getoutput('fgrep "runTopo.inputs.width" '+logfile)
+    strg=subprocess.getoutput('fgrep "runTopo.inputs.width" '+logfile)
     num_range_bin = int(string.split(strg)[-1])
-    strg=commands.getoutput('fgrep "runTopo.inputs.number_range_looks" '+logfile)
+    strg=subprocess.getoutput('fgrep "runTopo.inputs.number_range_looks" '+logfile)
     num_range_looks = int(string.split(strg)[-1])
     center_range = first_range + (num_range_bin/2-1)*range_pixel_res*num_range_looks
 ##    strg=commands.getoutput('fgrep "SLC Starting Range" '+logfile)
@@ -43,10 +43,10 @@ def auto_tree_height_single_ISCE(directory, date1, date2, numLooks, noiselevel, 
 ##    num_range_bin = float(string.split(strg)[string.split(strg).__len__()/2-1])
 ##    center_range = first_range + (num_range_bin/2-1)*range_pixel_res
 
-    strg=commands.getoutput('fgrep "master.instrument.incidence_angle" '+logfile)
+    strg=subprocess.getoutput('fgrep "master.instrument.incidence_angle" '+logfile)
     incid_angle = float(string.split(strg)[-1])
 
-    strg=commands.getoutput('fgrep "baseline.perp_baseline" '+logfile)
+    strg=subprocess.getoutput('fgrep "baseline.perp_baseline" '+logfile)
     baseline = (float(string.split(strg)[string.split(strg).__len__()/2-1])+float(string.split(strg)[string.split(strg).__len__()-1]))/2
 
     xmlfile = directory+"int_"+date1+"_"+date2+"/topophase.cor.geo.xml"

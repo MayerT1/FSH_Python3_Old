@@ -85,7 +85,7 @@ def forest_stand_height(scenes, edges, start_scene, iterations, linkfilename, fl
         output_file = open(file_directory + "output/" + "error_metric.json", 'w')
         json.dump([Y.tolist()], output_file)
         output_file.close()
-        print ("cal_error_metric file written at ") + (time.strftime("%H:%M:%S"))
+        print ("cal_error_metric file written at " + (time.strftime("%H:%M:%S"))) 
 
 # Gather parameters from the command line and run the function
 parser = argparse.ArgumentParser(description="Run Forest Stand Height module")

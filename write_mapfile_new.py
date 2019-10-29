@@ -79,7 +79,7 @@ def write_mapfile_new(scenes, flagfile, maskfile, directory, output_files):
         for filetype in output_files:
             wft.write_file_type(forest_only_height, "stand_height", filename, directory + image_folder, filetype, coords)
 
-    print ("all tree height map files written at ") + (time.strftime("%H:%M:%S"))
+    print ("all tree height map files written at "+ (time.strftime("%H:%M:%S")))
 
 
 # If function is run on its own, gather parameters from the command line and run the function

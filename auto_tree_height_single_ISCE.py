@@ -46,8 +46,14 @@ def auto_tree_height_single_ISCE(directory, date1, date2, numLooks, noiselevel, 
     strg=subprocess.getoutput('fgrep "master.instrument.incidence_angle" '+logfile)
     incid_angle = float(strg.split()[-1])
 
+    print ("start test")
     strg=subprocess.getoutput('fgrep "baseline.perp_baseline" '+logfile)
+    print(strg)
+
     baseline = (float(strg.split()[int(strg.split().__len__()/2-1)])+float(strg.split()[int(strg.split().__len__()-1)]))/2
+    print("this is the baseline value")
+    print (baseline)
+    print("end test")
 
     xmlfile = directory+"int_"+date1+"_"+date2+"/topophase.cor.geo.xml"
     tree = ET.parse(xmlfile)

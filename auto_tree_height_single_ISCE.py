@@ -30,11 +30,11 @@ def auto_tree_height_single_ISCE(directory, date1, date2, numLooks, noiselevel, 
     strg=subprocess.getoutput('fgrep "master.instrument.radar_wavelength" '+logfile)
     llambda = float(strg.split()[-1])
 
-    strg=subprocess.getoutput('fgrep "runTopo.inputs.range_first_sample" '+logfile)
+    strg=subprocess.getoutput('fgrep "runTopo.inputs.RANGE_FIRST_SAMPLE" '+logfile)
     first_range = float(strg.split()[-1])
-    strg=subprocess.getoutput('fgrep "runTopo.inputs.width" '+logfile)
+    strg=subprocess.getoutput('fgrep "runTopo.inputs.WIDTH" '+logfile)
     num_range_bin = int(strg.split()[-1])
-    strg=subprocess.getoutput('fgrep "runTopo.inputs.number_range_looks" '+logfile)
+    strg=subprocess.getoutput('fgrep "runTopo.inputs.NUMBER_RANGE_LOOKS" '+logfile)
     num_range_looks = int(strg.split()[-1])
     center_range = first_range + (num_range_bin/2-1)*range_pixel_res*num_range_looks
 ##    strg=commands.getoutput('fgrep "SLC Starting Range" '+logfile)
@@ -116,7 +116,11 @@ def auto_tree_height_single_ISCE(directory, date1, date2, numLooks, noiselevel, 
     # Read geolocated amp and cor files
 
     fid_cor = open(directory + "int_"+date1+"_"+date2+"/topophase.cor.geo", "rb")
+    print("I am here")
     cor_file = np.fromfile(fid_cor, dtype=np.dtype('<f'))
+    print(cor_file)
+    print(geo_width)
+    print(cor_file.shape)
 ##    pdb.set_trace()
     corr = cor_file.reshape(2*geo_width, -1, order='F')
     corr = corr[:,0:geo_nlines]
